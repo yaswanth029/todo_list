@@ -19,21 +19,23 @@ function addTask()
     savedata();
 }
 
-listcont.addEventListener("click",function(e)
+listcont.addEventListener("click", function(e)
 {
     if(e.target.tagName === "LI")
     {
         e.target.classList.toggle('checked');
+        savedata(); // <-- Saves the updated list when an item is checked/unchecked
     }
     else if(e.target.tagName === "SPAN")
     {
         e.target.parentElement.remove();
+        savedata(); // <-- Saves the updated list when an item is deleted
     }
-},false);
+}, false);
 
 function savedata()
 {
-    localStorage.setItem("data",listcont.innerHTML)
+    localStorage.setItem("data", listcont.innerHTML);
 }
 
 function showlist()
@@ -41,8 +43,7 @@ function showlist()
     let saved = localStorage.getItem("data");
     if(saved)
     {
-    listcont.innerHTML = saved;
+        listcont.innerHTML = saved;
     }
 }
 showlist();
-
